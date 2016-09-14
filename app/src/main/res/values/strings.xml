@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">HW2</string>
+    <string name="expense_name_label">Expense Name</string>
+    <string name="expense_category_label">Category</string>
+    <string name="expense_amount_label">Amount</string>
+    <string name="expense_date_label">Date</string>
+    <string name="expense_receipt_label">Receipt</string>
+    <string name="button_label_Add_Expense">Add Expense</string>
+    <string name="button_label_Edit_Expense">Edit Expense</string>
+    <string name="button_label_Delete_Expense">Delete Expense</string>
+    <string name="button_label_Show_Expense">Show Expense</string>
+    <string name="button_label_Finish">Finish</string>
+    <string name="button_label_select_expense">Select Expense</string>
+    <string name="button_label_save">Save</string>
+    <string name="button_label_delete">Delete</string>
+    <string name="button_label_cancel">Cancel</string>
+    <string name="text_label_Add_Expense">Add An Expense </string>
+    <string name="text_label_Name">Name</string>
+    <string name="text_label_Category">Category</string>
+    <string name="text_label_Amount">Amount</string>
+    <string name="text_label_Date">Date</string>
+    <string name="text_label_Details">Expense Details</string>
+    <string name="alert_title_Pick_Expense">Pick an Expense</string>
+</resources>
