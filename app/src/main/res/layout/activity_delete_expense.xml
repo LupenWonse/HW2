@@ -29,7 +29,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextName" />
+        android:id="@+id/editTextName"
+        android:enabled="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerCategory"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dialog"
+        android:clickable="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,7 +59,8 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editTextAmount" />
+        android:id="@+id/editTextAmount"
+        android:enabled="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,7 +76,8 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/editTextDate"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:enabled="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -110,7 +114,8 @@
             android:text="@string/button_label_cancel"
             android:id="@+id/buttonCancel"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="finishActivity"/>
     </LinearLayout>
 
 </LinearLayout>

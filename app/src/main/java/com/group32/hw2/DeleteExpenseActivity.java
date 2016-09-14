@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -46,52 +47,58 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         imageReceipt = (ImageView) findViewById(R.id.imageViewReceipt);
 
 
-        ArrayAdapter spinnerAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,Expense.categories);
+        ArrayAdapter spinnerAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, Expense.categories);
         spinnerCategories.setAdapter(spinnerAdapter);
     }
 
     public void selectExpense(View view) {
-        AlertDialog.Builder alertDialog = new  AlertDialog.Builder(this);
-        alertDialog.setTitle(R.string.app_name);
+        if (expenses != null && expenses.size() > 0) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle(R.string.app_name);
 
-        CharSequence expenseNames[] = new CharSequence[expenses.size()];
-        for (Expense expense : expenses){
-            expenseNames[expenses.indexOf(expense)] = expense.name;
-        }
-
-        alertDialog.setItems(expenseNames, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                selectedExpense = which;
-                displayExpense(expenses.get(which));
+            CharSequence expenseNames[] = new CharSequence[expenses.size()];
+            for (Expense expense : expenses) {
+                expenseNames[expenses.indexOf(expense)] = expense.name;
             }
-        });
 
-        alertDialog.create().show();
+            alertDialog.setItems(expenseNames, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    selectedExpense = which;
+                    displayExpense(expenses.get(which));
+                }
+            });
+
+            alertDialog.create().show();
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.no_expense_lable), Toast.LENGTH_SHORT).show();
+        }
     }
 
-private void displayExpense(Expense expense){
-            editExpenseName.setText(expense.name);
+    private void displayExpense(Expense expense) {
+        editExpenseName.setText(expense.name);
 
-    DateFormat defaultDateFormat = DateFormat.getDateInstance();
-    editExpenseDate.setText(defaultDateFormat.format(currentExpense.date));
-            editExpenseAmount.setText(expense.amount.toString());
-            spinnerCategories.setSelection(expense.category);
-            imageReceipt.setImageURI(Uri.parse(expense.image));
+        DateFormat defaultDateFormat = DateFormat.getDateInstance();
+        editExpenseDate.setText(defaultDateFormat.format(expense.date));
+        editExpenseAmount.setText(expense.amount.toString());
+        spinnerCategories.setSelection(expense.category);
+        imageReceipt.setImageURI(Uri.parse(expense.image));
 
-            selectedImage = Uri.parse(expense.image);
+        selectedImage = Uri.parse(expense.image);
 
-        }
+    }
+
     public void deleteExpense(View view) {
-        expenses.remove(selectedExpense);
 
+        expenses.remove(selectedExpense);
         Intent intent = new Intent();
-        intent.putExtra(MainActivity.EXPENSE_ARRAY_KEY,expenses);
-        setResult(1,intent);
+        intent.putExtra(MainActivity.EXPENSE_ARRAY_KEY, expenses);
+        setResult(1, intent);
         finish();
     }
 
-    public void finishActivity(View view){
+    public void finishActivity(View view) {
+
         finish();
     }
 }
