@@ -22,7 +22,8 @@ public class Expense implements Serializable {
 
     public String currencySymbol = Currency.getInstance("USD").getSymbol();
 
-    public static String[] categories = {"Groceries"
+    public static String[] categories = {"Select a category"
+                                        ,"Groceries"
                                         ,"Invoice"
                                         ,"Transportation"
                                         ,"Shopping"

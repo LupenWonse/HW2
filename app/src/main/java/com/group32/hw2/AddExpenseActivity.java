@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.net.URI;
 import java.text.DateFormat;
@@ -165,6 +166,11 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
 
         if (editTextDate.getText().length() <= 0){
             editTextDate.setError("Please select a date");
+            isInputGood = false;
+        }
+
+        if (spinnerCategory.getSelectedItemPosition() == 0){
+            Toast.makeText(this,"Please select a category",Toast.LENGTH_SHORT).show();
             isInputGood = false;
         }
 

@@ -185,6 +185,11 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
             isInputGood = false;
         }
 
+        if (spinnerCategories.getSelectedItemPosition() == 0){
+            Toast.makeText(this,"Please select a category",Toast.LENGTH_SHORT).show();
+            isInputGood = false;
+        }
+
         return  isInputGood;
     }
 
