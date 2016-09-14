@@ -23,7 +23,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
 
     private Expense currentExpense;
     private ArrayList<Expense> expenses;
-    private int selectedExpense;
+    private int selectedExpense = -1;
 
     private EditText editExpenseName;
     private Spinner spinnerCategories;
@@ -89,12 +89,15 @@ public class DeleteExpenseActivity extends AppCompatActivity {
     }
 
     public void deleteExpense(View view) {
-
-        expenses.remove(selectedExpense);
-        Intent intent = new Intent();
-        intent.putExtra(MainActivity.EXPENSE_ARRAY_KEY, expenses);
-        setResult(1, intent);
-        finish();
+        if (selectedExpense > 1) {
+            expenses.remove(selectedExpense);
+            Intent intent = new Intent();
+            intent.putExtra(MainActivity.EXPENSE_ARRAY_KEY, expenses);
+            setResult(1, intent);
+            finish();
+        } else {
+            Toast.makeText(this,"No Expense Selected",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void finishActivity(View view) {
