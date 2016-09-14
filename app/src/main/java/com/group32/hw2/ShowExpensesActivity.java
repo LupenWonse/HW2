@@ -83,7 +83,8 @@ public class ShowExpensesActivity extends AppCompatActivity {
         textExpenseCategory.setText(Expense.categories[currentExpense.category]);
         DateFormat defaultDateFormat = DateFormat.getDateInstance();
         textExpenseDate.setText(defaultDateFormat.format(currentExpense.date));
-        textExpenseAmount.setText(currentExpense.amount.toString());
+
+        textExpenseAmount.setText(currentExpense.amountToString());
 
         imageExpenseReceipt.setImageURI(Uri.parse(currentExpense.image));
     }

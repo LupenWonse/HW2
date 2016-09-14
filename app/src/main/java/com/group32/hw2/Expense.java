@@ -38,6 +38,7 @@ public class Expense implements Serializable {
     }
 
     public String amountToString(){
-        return currencySymbol + Double.toString(amount);
+
+        return currencySymbol + " " + Double.toString(amount);
     }
 }
