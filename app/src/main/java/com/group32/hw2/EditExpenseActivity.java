@@ -40,7 +40,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
 
     private DatePickerDialog datePickerDialog;
 
-    private int selectedExpense;
+    private int selectedExpense = -1;
     private Uri selectedImage;
 
 
@@ -92,26 +92,31 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     }
 
     public void selectExpense(View view) {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
-        CharSequence expenseNames[] = new CharSequence[expenses.size()];
-        for (Expense expense : expenses){
-            expenseNames[expenses.indexOf(expense)] = expense.name;
-        }
+        if(expenses.size() > 0) {
 
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
-        // TODO Make this a String value
-        alertDialog.setTitle(getString(R.string.alert_title_Pick_Expense));
-        alertDialog.setItems(expenseNames, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                selectedExpense = which;
-                displayExpense(expenses.get(which));
+            CharSequence expenseNames[] = new CharSequence[expenses.size()];
+            for (Expense expense : expenses) {
+                expenseNames[expenses.indexOf(expense)] = expense.name;
             }
-        });
 
-        alertDialog.create().show();
 
+            // TODO Make this a String value
+            alertDialog.setTitle(getString(R.string.alert_title_Pick_Expense));
+            alertDialog.setItems(expenseNames, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    selectedExpense = which;
+                    displayExpense(expenses.get(which));
+                }
+            });
+
+            alertDialog.create().show();
+        } else {
+            Toast.makeText(this,getString(R.string.no_expense_lable),Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void displayExpense(Expense expense){
@@ -130,40 +135,43 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     }
 
     public void saveExpense(View v) {
-        //TODO All verification to be handled here
-        if (checkInputs()) {
+        if (selectedExpense >= 0){
+            if (checkInputs()) {
 
-            Date date = new Date(1, 1, 2016);
-            Double amount;
-            String name;
-            int category = 0;
+                Date date = new Date(1, 1, 2016);
+                Double amount;
+                String name;
+                int category = 0;
 
 
-            name = editExpenseName.getText().toString();
-            amount = Double.parseDouble(editExpenseAmount.getText().toString());
-            try {
-                date = Expense.dateFormat.parse(editExpenseDate.getText().toString());
+                name = editExpenseName.getText().toString();
+                amount = Double.parseDouble(editExpenseAmount.getText().toString());
+                try {
+                    date = Expense.dateFormat.parse(editExpenseDate.getText().toString());
 
-            } catch (ParseException exception) {
-                Log.e("demo", "Date Could not be Parsed");
+                } catch (ParseException exception) {
+                    Log.e("demo", "Date Could not be Parsed");
+                }
+
+                category = spinnerCategories.getSelectedItemPosition();
+
+                Expense newExpense;
+
+                if (selectedImage != null) {
+                    newExpense = new Expense(date, amount, name, category, selectedImage.toString());
+                } else {
+                    newExpense = new Expense(date, amount, name, category, "");
+                }
+
+                Intent intent = new Intent();
+                expenses.set(selectedExpense, newExpense);
+
+                intent.putExtra(MainActivity.EXPENSE_ARRAY_KEY, expenses);
+                setResult(1, intent);
+                finish();
             }
-
-            category = spinnerCategories.getSelectedItemPosition();
-
-            Expense newExpense;
-
-            if (selectedImage != null) {
-                newExpense = new Expense(date, amount, name, category, selectedImage.toString());
-            } else {
-                newExpense = new Expense(date, amount, name, category, "");
-            }
-
-            Intent intent = new Intent();
-            expenses.set(selectedExpense, newExpense);
-
-            intent.putExtra(MainActivity.EXPENSE_ARRAY_KEY, expenses);
-            setResult(1, intent);
-            finish();
+        } else {
+            Toast.makeText(this, getString(R.string.toast_no_expense_selected),Toast.LENGTH_SHORT).show();
         }
     }
 
