@@ -23,4 +23,5 @@
     <string name="alert_title_Pick_Expense">Pick an Expense</string>
     <string name="no_expense_lable"> There are no expense to show. </string>
     <string name="toast_no_expense_selected">No Expense Selected</string>
+    <string name="toast_expense_added_label">Expense Added</string>
 </resources>

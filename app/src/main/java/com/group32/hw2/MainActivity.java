@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO Check for the type of initial request and act accordingly
         if (data != null && requestCode == REQUEST_ADD){
-            Toast.makeText(this,"ELEMENT Received",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getResources().getString(R.string.toast_expense_added_label),Toast.LENGTH_SHORT).show();
             expenses.add((Expense) data.getSerializableExtra(EXPENSE_KEY));
         } else if (data != null && requestCode == REQUEST_DELETE){
             expenses = (ArrayList<Expense>) data.getSerializableExtra(EXPENSE_ARRAY_KEY);
