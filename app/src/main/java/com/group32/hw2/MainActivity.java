@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,EditExpenseActivity.class);
                 intent.putExtra(EXPENSE_ARRAY_KEY,expenses);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_EDIT);
             }
         });
 
@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"ELEMENT Received",Toast.LENGTH_SHORT).show();
             expenses.add((Expense) data.getSerializableExtra(EXPENSE_KEY));
         } else if (data != null && requestCode == REQUEST_DELETE){
+            expenses = (ArrayList<Expense>) data.getSerializableExtra(EXPENSE_ARRAY_KEY);
+        } else if (data != null && requestCode == REQUEST_EDIT){
             expenses = (ArrayList<Expense>) data.getSerializableExtra(EXPENSE_ARRAY_KEY);
         }
     }
