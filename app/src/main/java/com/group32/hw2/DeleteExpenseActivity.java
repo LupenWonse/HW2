@@ -80,7 +80,9 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         spinnerCategories.setSelection(expense.category);
         imageReceipt.setImageURI(Uri.parse(expense.image));
 
-        selectedImage = Uri.parse(expense.image);
+        if (expense.image.length() > 0) {
+            selectedImage = Uri.parse(expense.image);
+        }
 
     }
 
