@@ -24,4 +24,6 @@
     <string name="no_expense_lable"> There are no expense to show. </string>
     <string name="toast_no_expense_selected">No Expense Selected</string>
     <string name="toast_expense_added_label">Expense Added</string>
+    <string name="toast_expense_updated_label">Expense Updated</string>
+    <string name="toast_expense_deleted_label">Expense Deleted</string>
 </resources>

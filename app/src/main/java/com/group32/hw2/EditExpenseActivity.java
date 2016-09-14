@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -37,7 +38,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     private EditText editExpenseDate;
     private ImageView imageReceipt;
     private ImageButton imageButtonDatePicker;
-
+    private Button buttonSave ;
     private DatePickerDialog datePickerDialog;
 
     private int selectedExpense = -1;
@@ -56,7 +57,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
         spinnerCategories = (Spinner) findViewById(R.id.spinnerCategories);
         imageReceipt = (ImageView) findViewById(R.id.imageReceipt);
         imageButtonDatePicker = (ImageButton) findViewById(R.id.imageButtonDatePicker);
-
+        buttonSave = (Button)findViewById(R.id.buttonSave);
         Calendar calendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(this, this, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
 
@@ -120,8 +121,17 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     }
 
     private void displayExpense(Expense expense){
-        editExpenseName.setText(expense.name);
 
+        // Enable All Controls
+        editExpenseName.setEnabled(true);
+        editExpenseAmount.setEnabled(true);
+        editExpenseDate.setEnabled(true);
+        spinnerCategories.setClickable(true);
+        imageReceipt.setEnabled(true);
+        imageButtonDatePicker.setClickable(true);
+        buttonSave.setEnabled(true);
+        // Update UI with expense details
+        editExpenseName.setText(expense.name);
         editExpenseDate.setText(Expense.dateFormat.format(expense.date));
 
         editExpenseAmount.setText(expense.amount.toString());
@@ -240,4 +250,5 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     public void finishActivity(View view){
         finish();
     }
+
 }

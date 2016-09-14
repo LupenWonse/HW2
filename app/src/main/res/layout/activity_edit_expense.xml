@@ -30,7 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editExpenseName"
-        android:maxLength="50" />
+        android:maxLength="50"
+        android:enabled="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,7 +44,8 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinnerCategories" />
+        android:id="@+id/spinnerCategories"
+        android:clickable="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,7 +59,8 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editAmount" />
+        android:id="@+id/editAmount"
+        android:enabled="false"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -79,13 +82,15 @@
             android:ems="10"
             android:id="@+id/editDate"
             android:layout_gravity="left"
-            android:focusable="false" />
+            android:focusable="false"
+            android:enabled="false"/>
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButtonDatePicker"
-            android:src="@android:drawable/ic_menu_today" />
+            android:src="@android:drawable/ic_menu_today"
+            android:clickable="false"/>
     </LinearLayout>
 
     <TextView
@@ -101,7 +106,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageReceipt"
         android:src="@android:drawable/ic_menu_gallery"
-        android:onClick="getImage" />
+        android:onClick="getImage"
+        android:clickable="false"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -115,7 +121,8 @@
             android:id="@+id/buttonSave"
             android:layout_gravity="center_horizontal"
             android:onClick="saveExpense"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:enabled="false"/>
 
         <Button
             android:layout_width="wrap_content"

@@ -77,8 +77,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,getResources().getString(R.string.toast_expense_added_label),Toast.LENGTH_SHORT).show();
             expenses.add((Expense) data.getSerializableExtra(EXPENSE_KEY));
         } else if (data != null && requestCode == REQUEST_DELETE){
+            Toast.makeText(this,getResources().getString(R.string.toast_expense_deleted_label),Toast.LENGTH_SHORT).show();
             expenses = (ArrayList<Expense>) data.getSerializableExtra(EXPENSE_ARRAY_KEY);
         } else if (data != null && requestCode == REQUEST_EDIT){
+            Toast.makeText(this,getResources().getString(R.string.toast_expense_updated_label),Toast.LENGTH_SHORT).show();
             expenses = (ArrayList<Expense>) data.getSerializableExtra(EXPENSE_ARRAY_KEY);
         }
     }
