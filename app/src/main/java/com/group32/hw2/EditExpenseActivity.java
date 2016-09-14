@@ -128,25 +128,64 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
 
     }
 
-    public void saveExpense(View v){
-        String name = editExpenseName.getText().toString();
-        Date date = new Date(2016,1,1);
-        int category;
-        String image;
+    public void saveExpense(View v) {
+        //TODO All verification to be handled here
+        if (checkInputs()) {
 
-        try{
-            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DATE_FIELD);
-            Log.d("demo",dateFormat.format(date));
-            date = dateFormat.parse(editExpenseDate.getText().toString());
+            Date date = new Date(1, 1, 2016);
+            Double amount;
+            String name;
+            int category = 0;
 
+
+            name = editExpenseName.getText().toString();
+            amount = Double.parseDouble(editExpenseAmount.getText().toString());
+            try {
+                DateFormat dateFormat = DateFormat.getDateInstance();
+                date = dateFormat.parse(editExpenseDate.getText().toString());
+
+            } catch (ParseException exception) {
+                Log.e("demo", "Date Could not be Parsed");
+            }
+
+            category = spinnerCategories.getSelectedItemPosition();
+
+            Expense newExpense;
+
+            if (selectedImage != null) {
+                newExpense = new Expense(date, amount, name, category, selectedImage.toString());
+            } else {
+                newExpense = new Expense(date, amount, name, category, "");
+            }
+
+            Intent intent = new Intent();
+            expenses.set(selectedExpense, newExpense);
+
+            intent.putExtra(MainActivity.EXPENSE_ARRAY_KEY, expenses);
+            setResult(1, intent);
+            finish();
         }
-        catch (ParseException exception) {
-            Log.e("demo","Date Could not be Parsed");
+    }
+
+    boolean checkInputs(){
+        boolean isInputGood = true;
+
+        if (editExpenseName.getText().length() <= 0){
+            editExpenseName.setError("Please Enter a Name for this Expense");
+            isInputGood = false;
         }
 
-        category = spinnerCategories.getSelectedItemPosition();
+        if (editExpenseAmount.getText().length() <= 0){
+            editExpenseAmount.setError("Please enter an Amount");
+            isInputGood = false;
+        }
 
+        if (editExpenseDate.getText().length() <= 0){
+            editExpenseDate.setError("Please select a date");
+            isInputGood = false;
+        }
 
+        return  isInputGood;
     }
 
     @Override
