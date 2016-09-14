@@ -85,8 +85,7 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
         calendar.set(year,monthOfYear,dayOfMonth);
         Date chosenDate = calendar.getTime();
 
-        DateFormat dateFormat = DateFormat.getDateInstance();
-        editTextDate.setText(dateFormat.format(chosenDate));
+        editTextDate.setText(Expense.dateFormat.format(chosenDate));
     }
 
     public void addExpense(View view) throws ParseException {
@@ -102,8 +101,7 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
             name = editTextName.getText().toString();
             amount = Double.parseDouble(editTextAmount.getText().toString());
             try{
-                DateFormat dateFormat = DateFormat.getDateInstance();
-                date = dateFormat.parse(editTextDate.getText().toString());
+                date = Expense.dateFormat.parse(editTextDate.getText().toString());
 
             }
             catch (ParseException exception) {

@@ -75,8 +75,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
     private void displayExpense(Expense expense) {
         editExpenseName.setText(expense.name);
 
-        DateFormat defaultDateFormat = DateFormat.getDateInstance();
-        editExpenseDate.setText(defaultDateFormat.format(expense.date));
+        editExpenseDate.setText(Expense.dateFormat.format(expense.date));
         editExpenseAmount.setText(expense.amount.toString());
         spinnerCategories.setSelection(expense.category);
         imageReceipt.setImageURI(Uri.parse(expense.image));

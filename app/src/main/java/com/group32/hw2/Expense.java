@@ -2,6 +2,7 @@ package com.group32.hw2;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Date;
@@ -10,6 +11,8 @@ import java.util.Date;
  * Created by ahmet on 08/09/16.
  */
 public class Expense implements Serializable {
+
+    public static DateFormat dateFormat = java.text.DateFormat.getDateInstance(DateFormat.DATE_FIELD);
 
     public Date date;
     public Double amount;

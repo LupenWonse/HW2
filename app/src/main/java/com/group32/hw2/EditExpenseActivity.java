@@ -117,8 +117,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     private void displayExpense(Expense expense){
         editExpenseName.setText(expense.name);
 
-        DateFormat defaultDateFormat = DateFormat.getDateInstance();
-        editExpenseDate.setText(defaultDateFormat.format(expense.date));
+        editExpenseDate.setText(Expense.dateFormat.format(expense.date));
 
         editExpenseAmount.setText(expense.amount.toString());
         spinnerCategories.setSelection(expense.category);
@@ -143,8 +142,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
             name = editExpenseName.getText().toString();
             amount = Double.parseDouble(editExpenseAmount.getText().toString());
             try {
-                DateFormat dateFormat = DateFormat.getDateInstance();
-                date = dateFormat.parse(editExpenseDate.getText().toString());
+                date = Expense.dateFormat.parse(editExpenseDate.getText().toString());
 
             } catch (ParseException exception) {
                 Log.e("demo", "Date Could not be Parsed");
@@ -198,8 +196,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
         calendar.set(year,monthOfYear,dayOfMonth);
         Date chosenDate = calendar.getTime();
 
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DATE_FIELD);
-        editExpenseDate.setText(dateFormat.format(chosenDate));
+        editExpenseDate.setText(Expense.dateFormat.format(chosenDate));
     }
 
     public void getImage(View view){
