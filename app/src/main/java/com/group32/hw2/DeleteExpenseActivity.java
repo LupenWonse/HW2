@@ -86,7 +86,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
     }
 
     public void deleteExpense(View view) {
-        if (selectedExpense > 1) {
+        if (selectedExpense >= 0) {
             expenses.remove(selectedExpense);
             Intent intent = new Intent();
             intent.putExtra(MainActivity.EXPENSE_ARRAY_KEY, expenses);
