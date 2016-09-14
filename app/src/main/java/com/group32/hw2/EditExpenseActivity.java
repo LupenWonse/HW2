@@ -122,9 +122,11 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
 
         editExpenseAmount.setText(expense.amount.toString());
         spinnerCategories.setSelection(expense.category);
-        imageReceipt.setImageURI(Uri.parse(expense.image));
 
-        selectedImage = Uri.parse(expense.image);
+        if (expense.image.length() > 0 ) {
+            imageReceipt.setImageURI(Uri.parse(expense.image));
+            selectedImage = Uri.parse(expense.image);
+        }
 
     }
 
