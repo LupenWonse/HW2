@@ -30,7 +30,7 @@ import java.util.Date;
 
 public class AddExpenseActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    // UI Component variable declerations
+    // UI Component variable decelerations
     private EditText editTextName;
     private EditText editTextAmount;
     private Spinner spinnerCategory;
@@ -88,7 +88,6 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
     }
 
     public void addExpense(View view) throws ParseException {
-        //TODO All verification to be handled here
         if (checkInputs()) {
 
             Date date = new Date(0);
@@ -134,7 +133,6 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
         } else {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
-            intent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             startActivityForResult(intent, 100);
         }
@@ -144,7 +142,7 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Check if user chose an image
-        if (requestCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             // If yes store the imageURI
             selectedImage = data.getData();
             imageView.setImageURI(selectedImage);

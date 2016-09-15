@@ -45,13 +45,13 @@ public class ShowExpensesActivity extends AppCompatActivity {
             }
         });
         // Get the expenses array from intent
-        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("EXPENSEARRAY")){
-            expenses = (ArrayList<Expense>) getIntent().getExtras().getSerializable("EXPENSEARRAY");
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(MainActivity.EXPENSE_ARRAY_KEY)){
+            expenses = (ArrayList<Expense>) getIntent().getExtras().getSerializable(MainActivity.EXPENSE_ARRAY_KEY);
             if (expenses.size() > 0) {
                 displayExpense(0);
             }
             else {
-                Toast.makeText(this,"No Expense To Show",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getString(R.string.no_expense_lable),Toast.LENGTH_SHORT).show();
             }
         }
     }

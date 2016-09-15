@@ -237,7 +237,6 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
         } else {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
-            intent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             startActivityForResult(intent, 100);
         }
