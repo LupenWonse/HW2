@@ -106,7 +106,8 @@
             android:id="@+id/buttonDelete"
             android:layout_gravity="center_horizontal"
             android:onClick="deleteExpense"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:enabled="false"/>
 
         <Button
             android:layout_width="wrap_content"

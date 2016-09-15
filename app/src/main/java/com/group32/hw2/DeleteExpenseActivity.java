@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -29,6 +30,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
     private ImageView imageReceipt;
 
     private Uri selectedImage;
+    private Button buttonDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         editExpenseAmount = (EditText) findViewById(R.id.editTextAmount);
         editExpenseDate = (EditText) findViewById(R.id.editTextDate);
         spinnerCategories = (Spinner) findViewById(R.id.spinnerCategory);
+        buttonDelete = (Button) findViewById(R.id.buttonDelete);
+
         imageReceipt = (ImageView) findViewById(R.id.imageViewReceipt);
 
 
@@ -62,6 +66,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     selectedExpense = which;
+                    buttonDelete.setEnabled(true);
                     displayExpense(expenses.get(which));
                 }
             });
