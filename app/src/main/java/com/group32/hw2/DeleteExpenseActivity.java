@@ -28,8 +28,6 @@ public class DeleteExpenseActivity extends AppCompatActivity {
     private EditText editExpenseAmount;
     private EditText editExpenseDate;
     private ImageView imageReceipt;
-
-    private Uri selectedImage;
     private Button buttonDelete;
 
     @Override
@@ -43,6 +41,8 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         editExpenseAmount = (EditText) findViewById(R.id.editTextAmount);
         editExpenseDate = (EditText) findViewById(R.id.editTextDate);
         spinnerCategories = (Spinner) findViewById(R.id.spinnerCategory);
+        spinnerCategories.setEnabled(false);
+
         buttonDelete = (Button) findViewById(R.id.buttonDelete);
 
         imageReceipt = (ImageView) findViewById(R.id.imageViewReceipt);
@@ -83,10 +83,10 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         editExpenseDate.setText(Expense.dateFormat.format(expense.date));
         editExpenseAmount.setText(expense.amount.toString());
         spinnerCategories.setSelection(expense.category);
-        imageReceipt.setImageURI(Uri.parse(expense.image));
+
 
         if (expense.image.length() > 0) {
-            selectedImage = Uri.parse(expense.image);
+            imageReceipt.setImageURI(Uri.parse(expense.image));
         }
 
     }

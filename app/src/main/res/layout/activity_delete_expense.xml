@@ -44,8 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerCategory"
-        android:spinnerMode="dialog"
-        android:clickable="false"/>
+        android:spinnerMode="dialog" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,14 +69,29 @@
         android:id="@+id/textView5"
         android:layout_gravity="left" />
 
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/editTextDate"
-        android:layout_gravity="center_horizontal"
-        android:enabled="false"/>
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/editTextDate"
+            android:layout_gravity="left"
+            android:focusable="false"
+            android:layout_weight="1"
+            android:enabled="false"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageGetDate"
+            android:src="@android:drawable/ic_menu_today"
+            android:clickable="false"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,7 +106,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageViewReceipt"
         android:src="@android:drawable/ic_menu_gallery"
-        android:onClick="getImage" />
+        android:clickable="false"/>
 
     <LinearLayout
         android:orientation="horizontal"

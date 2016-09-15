@@ -80,7 +80,8 @@
             android:ems="10"
             android:id="@+id/editTextDate"
             android:layout_gravity="left"
-            android:focusable="false" />
+            android:focusable="false"
+            android:layout_weight="1" />
 
         <ImageButton
             android:layout_width="wrap_content"

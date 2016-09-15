@@ -55,8 +55,14 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
         editExpenseAmount = (EditText) findViewById(R.id.editAmount);
         editExpenseDate = (EditText) findViewById(R.id.editDate);
         spinnerCategories = (Spinner) findViewById(R.id.spinnerCategories);
+        spinnerCategories.setEnabled(false);
+
         imageReceipt = (ImageView) findViewById(R.id.imageReceipt);
+        imageReceipt.setEnabled(false);
+
         imageButtonDatePicker = (ImageButton) findViewById(R.id.imageButtonDatePicker);
+        imageButtonDatePicker.setEnabled(false);
+
         buttonSave = (Button)findViewById(R.id.buttonSave);
         Calendar calendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(this, this, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
@@ -126,9 +132,9 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
         editExpenseName.setEnabled(true);
         editExpenseAmount.setEnabled(true);
         editExpenseDate.setEnabled(true);
-        spinnerCategories.setClickable(true);
+        spinnerCategories.setEnabled(true);
         imageReceipt.setEnabled(true);
-        imageButtonDatePicker.setClickable(true);
+        imageButtonDatePicker.setEnabled(true);
         buttonSave.setEnabled(true);
         // Update UI with expense details
         editExpenseName.setText(expense.name);
@@ -242,9 +248,10 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        selectedImage = data.getData();
-        imageReceipt.setImageURI(selectedImage);
+        if (resultCode == RESULT_OK) {
+            selectedImage = data.getData();
+            imageReceipt.setImageURI(selectedImage);
+        }
     }
 
     public void finishActivity(View view){
