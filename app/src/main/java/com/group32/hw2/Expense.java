@@ -1,3 +1,9 @@
+// Homework 02
+// Expense.java
+// Akarsh Gupta     - 800969888
+// Ahmet Gencoglu   - 800982227
+//
+
 package com.group32.hw2;
 
 import java.io.Serializable;

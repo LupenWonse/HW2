@@ -1,3 +1,9 @@
+// Homework 02
+// EditExpenseActivity.java
+// Akarsh Gupta     - 800969888
+// Ahmet Gencoglu   - 800982227
+//
+
 package com.group32.hw2;
 
 import android.app.DatePickerDialog;
