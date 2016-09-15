@@ -87,6 +87,7 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
         Date chosenDate = calendar.getTime();
 
         editTextDate.setText(Expense.dateFormat.format(chosenDate));
+        editTextDate.setError(null);
     }
 
     public void addExpense(View view) throws ParseException {
