@@ -1,9 +1,7 @@
 package com.group32.hw2;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Date;
 

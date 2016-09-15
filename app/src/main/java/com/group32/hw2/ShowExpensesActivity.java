@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class ShowExpensesActivity extends AppCompatActivity {
