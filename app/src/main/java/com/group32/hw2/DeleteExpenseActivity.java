@@ -59,7 +59,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         // Check for expenses and if there are any expenses let the user choose with Alert Dialog
         if (expenses != null && expenses.size() > 0) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setTitle(R.string.app_name);
+            alertDialog.setTitle(R.string.alert_title_Pick_Expense);
 
             CharSequence expenseNames[] = new CharSequence[expenses.size()];
             for (Expense expense : expenses) {
@@ -104,7 +104,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
             setResult(1, intent);
             finish();
         } else {
-            Toast.makeText(this,"No Expense Selected",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString(R.string.no_expense_lable),Toast.LENGTH_SHORT).show();
         }
     }
 
