@@ -24,13 +24,13 @@ import java.util.Date;
 
 public class AddExpenseActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
+    // UI Component variable declerations
     private EditText editTextName;
     private EditText editTextAmount;
     private Spinner spinnerCategory;
     private EditText editTextDate;
     private ImageButton imageButtonDatepicker;
     private ImageView imageView;
-
     private Uri selectedImage;
 
     @Override
@@ -38,6 +38,7 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
 
+        // Setup UI Components
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextAmount = (EditText) findViewById(R.id.editTextAmount);
         editTextDate = (EditText) findViewById(R.id.editTextDate);
@@ -50,7 +51,7 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
 
         Calendar calendar = Calendar.getInstance();
         final DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
-
+        // When user clicks on the Date editText the DatePickerDialog will be used
         editTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +65,6 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
                 datePickerDialog.show();
             }
         });
-
     }
 
     @Override
@@ -75,7 +75,9 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
         calendar.set(year,monthOfYear,dayOfMonth);
         Date chosenDate = calendar.getTime();
 
+        // Set the date using the class defined format
         editTextDate.setText(Expense.dateFormat.format(chosenDate));
+        // Clear any error if present
         editTextDate.setError(null);
     }
 
@@ -83,32 +85,31 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
         //TODO All verification to be handled here
         if (checkInputs()) {
 
-            Date date = new Date(1, 1, 2016);
+            Date date = new Date(0);
             Double amount;
             String name;
-            int category = 0;
-
-
+            int category;
+            // Get user input from UI elements
             name = editTextName.getText().toString();
             amount = Double.parseDouble(editTextAmount.getText().toString());
+            // Try to get the date from the text field
             try{
                 date = Expense.dateFormat.parse(editTextDate.getText().toString());
-
             }
             catch (ParseException exception) {
                 Log.e("demo","Date Could not be Parsed");
             }
 
             category = spinnerCategory.getSelectedItemPosition();
-
+            // Create new Expense
             Expense newExpense;
-
+            // Initialize with data
             if (selectedImage != null) {
                 newExpense = new Expense(date, amount, name, category, selectedImage.toString());
             } else {
                 newExpense = new Expense(date, amount, name, category, "");
             }
-
+            // Return the newly created Expense object to the requesting activity
             Intent intent = new Intent();
             intent.putExtra(MainActivity.EXPENSE_KEY, newExpense);
             setResult(1, intent);
@@ -117,7 +118,7 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
     }
 
     public void getImage(View view){
-
+        // Use an SDK dependent code to handle Image access from gallery
         if(Build.VERSION.SDK_INT > 19) {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.setType("image/*");
@@ -136,14 +137,18 @@ public class AddExpenseActivity extends AppCompatActivity implements DatePickerD
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        selectedImage = data.getData();
-        imageView.setImageURI(selectedImage);
+        // Check if user chose an image
+        if (requestCode == RESULT_OK) {
+            // If yes store the imageURI
+            selectedImage = data.getData();
+            imageView.setImageURI(selectedImage);
+        }
     }
 
     boolean checkInputs(){
         boolean isInputGood = true;
 
+        // Input validitation
         if (editTextName.getText().length() <= 0){
             editTextName.setError("Please Enter a Name for this Expense");
             isInputGood = false;

@@ -71,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // TODO Check for the type of initial request and act accordingly
+        // Handle Activity Results
         if (data != null && requestCode == REQUEST_ADD){
             Toast.makeText(this,getResources().getString(R.string.toast_expense_added_label),Toast.LENGTH_SHORT).show();
             expenses.add((Expense) data.getSerializableExtra(EXPENSE_KEY));

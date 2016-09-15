@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class DeleteExpenseActivity extends AppCompatActivity {
 
-    private Expense currentExpense;
     private ArrayList<Expense> expenses;
     private int selectedExpense = -1;
 
@@ -33,8 +32,10 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_expense);
 
+        // Obtain the provided Expense Array List
         expenses = (ArrayList<Expense>) getIntent().getExtras().getSerializable(MainActivity.EXPENSE_ARRAY_KEY);
 
+        // Setup UI component
         editExpenseName = (EditText) findViewById(R.id.editTextName);
         editExpenseAmount = (EditText) findViewById(R.id.editTextAmount);
         editExpenseDate = (EditText) findViewById(R.id.editTextDate);
@@ -42,15 +43,14 @@ public class DeleteExpenseActivity extends AppCompatActivity {
         spinnerCategories.setEnabled(false);
 
         buttonDelete = (Button) findViewById(R.id.buttonDelete);
-
         imageReceipt = (ImageView) findViewById(R.id.imageViewReceipt);
-
 
         ArrayAdapter spinnerAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, Expense.categories);
         spinnerCategories.setAdapter(spinnerAdapter);
     }
 
     public void selectExpense(View view) {
+        // Check for expenses and if there are any expenses let the user choose with Alert Dialog
         if (expenses != null && expenses.size() > 0) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(R.string.app_name);
@@ -68,20 +68,20 @@ public class DeleteExpenseActivity extends AppCompatActivity {
                     displayExpense(expenses.get(which));
                 }
             });
-
+            // Display alert dialog
             alertDialog.create().show();
         } else {
+            // Show warning that there are no expenses
             Toast.makeText(this, getResources().getString(R.string.no_expense_lable), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void displayExpense(Expense expense) {
+        // Display the chosen Expense object
         editExpenseName.setText(expense.name);
-
         editExpenseDate.setText(Expense.dateFormat.format(expense.date));
         editExpenseAmount.setText(expense.amount.toString());
         spinnerCategories.setSelection(expense.category);
-
 
         if (expense.image.length() > 0) {
             imageReceipt.setImageURI(Uri.parse(expense.image));
@@ -90,6 +90,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
     }
 
     public void deleteExpense(View view) {
+        // Delete the selected Expense object
         if (selectedExpense >= 0) {
             expenses.remove(selectedExpense);
             Intent intent = new Intent();
@@ -102,7 +103,7 @@ public class DeleteExpenseActivity extends AppCompatActivity {
     }
 
     public void finishActivity(View view) {
-
+        // End activity
         finish();
     }
 }

@@ -25,12 +25,11 @@ public class ShowExpensesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_expense);
-
+        // Setup UI components
         textExpenseName = (TextView) findViewById(R.id.textExpenseName);
         textExpenseAmount = (TextView) findViewById(R.id.textExpenseAmount);
         textExpenseCategory = (TextView) findViewById(R.id.textExpenseCategory);
         textExpenseDate = (TextView) findViewById(R.id.textExpenseDate);
-
         imageExpenseReceipt = (ImageView) findViewById(R.id.imageExpenseReceipt);
 
         findViewById(R.id.buttonFinish).setOnClickListener(new View.OnClickListener() {
@@ -39,7 +38,7 @@ public class ShowExpensesActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        // Get the expenses array from intent
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("EXPENSEARRAY")){
             expenses = (ArrayList<Expense>) getIntent().getExtras().getSerializable("EXPENSEARRAY");
             if (expenses.size() > 0) {
@@ -50,7 +49,7 @@ public class ShowExpensesActivity extends AppCompatActivity {
             }
         }
     }
-
+    // Implement First, Last, Next, Previous Buttons
     public void nextExpense(View v){
         if ( currentExpense < expenses.size() - 1 ) {
             currentExpense += 1;
@@ -76,13 +75,13 @@ public class ShowExpensesActivity extends AppCompatActivity {
     }
 
     void displayExpense(int expenseNumber) {
+        // Display the selected expense by updating UI components
         Expense currentExpense = expenses.get(expenseNumber);
+
         textExpenseName.setText(currentExpense.name);
         textExpenseCategory.setText(Expense.categories[currentExpense.category]);
         textExpenseDate.setText(Expense.dateFormat.format(currentExpense.date));
-
         textExpenseAmount.setText(currentExpense.amountToString());
-
         imageExpenseReceipt.setImageURI(Uri.parse(currentExpense.image));
     }
 }

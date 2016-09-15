@@ -26,7 +26,7 @@ import java.util.Date;
 public class EditExpenseActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ArrayList<Expense> expenses;
-
+    // Setup UI components
     private EditText editExpenseName;
     private Spinner spinnerCategories;
     private EditText editExpenseAmount;
@@ -35,7 +35,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     private ImageButton imageButtonDatePicker;
     private Button buttonSave ;
     private DatePickerDialog datePickerDialog;
-
+    // Internal variables
     private int selectedExpense = -1;
     private Uri selectedImage;
 
@@ -46,6 +46,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_expense);
 
+        // Setup UI components and disable until an Expense is selected
         editExpenseName = (EditText) findViewById(R.id.editExpenseName);
         editExpenseAmount = (EditText) findViewById(R.id.editAmount);
         editExpenseDate = (EditText) findViewById(R.id.editDate);
@@ -76,17 +77,14 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
             }
         });
 
-
-        // TODO Find correct layout to use
         ArrayAdapter spinnerAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,Expense.categories);
         spinnerCategories.setAdapter(spinnerAdapter);
-
-        // TODO Check what happens without intent
-        // TODO Change the key to variable
+        // Get the Expenses array from intent
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(MainActivity.EXPENSE_ARRAY_KEY)) {
             expenses = (ArrayList<Expense>) getIntent().getExtras().getSerializable(MainActivity.EXPENSE_ARRAY_KEY);
         }
         else {
+            // Error handling
             Log.e("hw2","Edit Activity called without any intent. This should not happen");
             finish();
         }
@@ -94,7 +92,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     }
 
     public void selectExpense(View view) {
-
+        // Show and Alert dialog to choose expense if there are any
         if(expenses.size() > 0) {
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -104,8 +102,6 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
                 expenseNames[expenses.indexOf(expense)] = expense.name;
             }
 
-
-            // TODO Make this a String value
             alertDialog.setTitle(getString(R.string.alert_title_Pick_Expense));
             alertDialog.setItems(expenseNames, new DialogInterface.OnClickListener() {
                 @Override
@@ -114,7 +110,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
                     displayExpense(expenses.get(which));
                 }
             });
-
+            // Show alert dialog
             alertDialog.create().show();
         } else {
             Toast.makeText(this,getString(R.string.no_expense_lable),Toast.LENGTH_SHORT).show();
@@ -131,6 +127,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
         imageReceipt.setEnabled(true);
         imageButtonDatePicker.setEnabled(true);
         buttonSave.setEnabled(true);
+
         // Update UI with expense details
         editExpenseName.setText(expense.name);
         editExpenseDate.setText(Expense.dateFormat.format(expense.date));
@@ -146,14 +143,14 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     }
 
     public void saveExpense(View v) {
+        // Save the selected expense with new values
         if (selectedExpense >= 0){
             if (checkInputs()) {
 
-                Date date = new Date(1, 1, 2016);
+                Date date = new Date(1);
                 Double amount;
                 String name;
-                int category = 0;
-
+                int category;
 
                 name = editExpenseName.getText().toString();
                 amount = Double.parseDouble(editExpenseAmount.getText().toString());
@@ -187,6 +184,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     }
 
     boolean checkInputs(){
+        // Input validation and error generation
         boolean isInputGood = true;
 
         if (editExpenseName.getText().length() <= 0){
@@ -214,7 +212,6 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
         // Update the edit Text Field with the date
         Calendar calendar = Calendar.getInstance();
         calendar.set(year,monthOfYear,dayOfMonth);
@@ -224,7 +221,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     }
 
     public void getImage(View view){
-
+        // SDK dependent access to the gallery to ensure we get the correct URI for the SDK
         if(Build.VERSION.SDK_INT > 19) {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.setType("image/*");
@@ -243,6 +240,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // When the user picks an image store the URI
         if (resultCode == RESULT_OK) {
             selectedImage = data.getData();
             imageReceipt.setImageURI(selectedImage);
@@ -250,6 +248,7 @@ public class EditExpenseActivity extends AppCompatActivity implements DatePicker
     }
 
     public void finishActivity(View view){
+        // End Activity
         finish();
     }
 

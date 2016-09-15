@@ -9,9 +9,9 @@ import java.util.Date;
  * Created by ahmet on 08/09/16.
  */
 public class Expense implements Serializable {
-
+    // Static dateFormat
     public static DateFormat dateFormat = java.text.DateFormat.getDateInstance(DateFormat.DATE_FIELD);
-
+    // Instance variables
     public Date date;
     public Double amount;
     public String name;
@@ -19,7 +19,7 @@ public class Expense implements Serializable {
     public String image;
 
     public String currencySymbol = Currency.getInstance("USD").getSymbol();
-
+    // Static categories
     public static String[] categories = {"Select a category"
                                         ,"Groceries"
                                         ,"Invoice"
@@ -30,7 +30,7 @@ public class Expense implements Serializable {
                                         ,"Utilities"
                                         ,"Others"};
 
-
+    // Constructor
     public Expense(Date date, Double amount, String name, int category, String image) {
         this.date = date;
         this.amount = amount;
@@ -38,7 +38,7 @@ public class Expense implements Serializable {
         this.category = category;
         this.image = image;
     }
-
+    // Helper function to display amount with currency
     public String amountToString(){
 
         return currencySymbol + " " + Double.toString(amount);
